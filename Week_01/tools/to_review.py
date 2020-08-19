@@ -98,18 +98,18 @@ def new_review():
     """
     if is_all_done():
         one_day = datetime.timedelta(days=1)
-        task_dict = get_tasks_by_day()
+        task_dict = get_tasks_first_add()
 
         dates_strlist = task_dict.keys()
         tasks_add_raw = []
         tasks_add_dict = {}
-        for key in list(dates_strlist):
+        for day_ in list(dates_strlist):
             today = datetime.datetime(
                 datetime.datetime.today().year,
                 datetime.datetime.today().month,
                 datetime.datetime.today().day,
             )
-            date = datetime.datetime.strptime(key, "%Y-%m-%d")
+            date_ = datetime.datetime.strptime(day_, "%Y-%m-%d")
 
             """
             review rule (by day):
@@ -121,18 +121,18 @@ def new_review():
                 After repeat 5 times:
                     review every week
             """
-            if today - date <= one_day * 3:
-                tasks_add_raw.extend(task_dict[key])
-            elif today - date == one_day * 4:
+            if today - date_ <= one_day * 3:
+                tasks_add_raw.extend(task_dict[day_])
+            elif today - date_ == one_day * 4:
                 continue
-            elif today - date == one_day * 5:
-                tasks_add_raw.extend(task_dict[key])
-            elif one_day * 5 < today - date <= one_day * 7:
+            elif today - date_ == one_day * 5:
+                tasks_add_raw.extend(task_dict[day_])
+            elif one_day * 5 < today - date_ <= one_day * 7:
                 continue
-            elif today - date == one_day * 8:
-                tasks_add_raw.extend(task_dict[key])
-            elif (today - date) % 7 == 0:
-                tasks_add_raw.extend(task_dict[key])
+            elif today - date_ == one_day * 8:
+                tasks_add_raw.extend(task_dict[day_])
+            elif (today - date_) % 7 == 0:
+                tasks_add_raw.extend(task_dict[day_])
 
         status = dict(get_status())
         for item in tasks_add_raw:
@@ -169,6 +169,6 @@ if __name__ == "__main__":
     # print()
     # pprint(get_tasks_by_day())
     pprint(get_tasks_first_add())
-    # pprint(new_review())
-    # new_task_write_to_file()
+    pprint(new_review())
+    new_task_write_to_file()
 
