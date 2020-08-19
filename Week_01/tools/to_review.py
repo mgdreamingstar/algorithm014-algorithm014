@@ -68,7 +68,6 @@ def new_review():
     add new todo
     """
     if is_all_done():
-        today_str = datetime.datetime.today().strftime("%Y-%m-%d")
         one_day = datetime.timedelta(days=1)
         task_dict = get_tasks_by_day()
 
@@ -114,10 +113,24 @@ def new_review():
             else:
                 continue
 
-        return tasks_add_dict
+        return {k:v for k,v in sorted(tasks_add_dict.items(), key= lambda item: item[1])}
 
     else:
         return "Please complete all tasks."
+
+
+def new_task_write_to_file():
+    today_str = datetime.datetime.today().strftime("%Y-%m-%d")
+    with open(
+        r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "a", encoding="utf-8"
+    ) as f:
+        task_add_dict = new_review()
+        f.write('\n\n')
+        f.write(today_str + ":\n")
+        for key in task_add_dict:
+            line = '  [ ] ' + key + "#" + str(task_add_dict[key])
+            f.write(line)
+            f.write('\n')
 
 
 if __name__ == "__main__":
@@ -127,4 +140,5 @@ if __name__ == "__main__":
     # print()
     # pprint(get_tasks_by_day())
     pprint(new_review())
+    new_task_write_to_file()
 
