@@ -49,6 +49,35 @@ def get_tasks_by_day():
     return tasks_dict
 
 
+def get_tasks_first_add():
+    """
+    获取任务第一次添加的日期。
+    
+    out:
+    dict { '日期' : [任务1, 任务2, ...] ... }
+    """
+
+    with open(
+        r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "r", encoding="utf-8"
+    ) as f:
+        data = f.readlines()
+
+    tasks_dict = {}
+    last_date = ""
+
+    for item in data:
+        if re.match(r"\d{4}-\d{2}-\d{2}", item):
+            date = re.match(r"\d{4}-\d{2}-\d{2}", item).group()
+            last_date = date
+            tasks_dict[date] = []
+        elif item != r"\n" and not re.match(r"^[ \n]*$", item):
+            if item.split("#")[1][0] == '1':
+                task = item.split("#")[0]
+                task_formated = task.lstrip()[4:]
+                tasks_dict[last_date].append(task_formated)
+    return tasks_dict
+
+
 def is_all_done():
     with open(
         r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "r", encoding="utf-8"
@@ -113,7 +142,7 @@ def new_review():
             else:
                 continue
 
-        return {k:v for k,v in sorted(tasks_add_dict.items(), key= lambda item: item[1])}
+        return {k: v for k, v in sorted(tasks_add_dict.items(), key=lambda item: item[1])}
 
     else:
         return "Please complete all tasks."
@@ -125,12 +154,12 @@ def new_task_write_to_file():
         r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "a", encoding="utf-8"
     ) as f:
         task_add_dict = new_review()
-        f.write('\n\n')
+        f.write("\n\n")
         f.write(today_str + ":\n")
         for key in task_add_dict:
-            line = '  [ ] ' + key + "#" + str(task_add_dict[key])
+            line = "  [ ] " + key + "#" + str(task_add_dict[key])
             f.write(line)
-            f.write('\n')
+            f.write("\n")
 
 
 if __name__ == "__main__":
@@ -139,6 +168,7 @@ if __name__ == "__main__":
     # print("  all done." if is_all_done() else "  not all done.")
     # print()
     # pprint(get_tasks_by_day())
-    pprint(new_review())
-    new_task_write_to_file()
+    pprint(get_tasks_first_add())
+    # pprint(new_review())
+    # new_task_write_to_file()
 
