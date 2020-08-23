@@ -11,9 +11,7 @@ class Solution:
                     
         2nd Solution (fast):
         """
-        hash_nums = {}
-        for ind, num in enumerate(nums):
-            hash_nums[num] = ind
+        hash_nums = dict(zip(nums, range(len(nums))))
         for ind, num in enumerate(nums):
             if target - num in hash_nums and ind != hash_nums[target - num]:
                 return [ind, hash_nums[target - num]] 
