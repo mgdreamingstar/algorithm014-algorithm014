@@ -71,7 +71,7 @@ def get_tasks_first_add():
             last_date = date
             tasks_dict[date] = []
         elif item != r"\n" and not re.match(r"^[ \n]*$", item):
-            if item.split("#")[1][0] == '1':
+            if 'Week' not in item and item.split("#")[1][0] == '1':
                 task = item.split("#")[0]
                 task_formated = task.lstrip()[4:]
                 tasks_dict[last_date].append(task_formated)
@@ -169,6 +169,6 @@ if __name__ == "__main__":
     # print()
     # pprint(get_tasks_by_day())
     pprint(get_tasks_first_add())
-    pprint(new_review())
-    new_task_write_to_file()
+    # pprint(new_review())
+    # new_task_write_to_file()
 
