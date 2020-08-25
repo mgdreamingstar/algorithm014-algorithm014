@@ -2,6 +2,15 @@ import re
 from re import template
 from pprint import pprint
 import datetime
+import json
+
+
+def pretty_print(x):
+    if type(x) == dict:
+        temp = json.dumps(x, indent=4, ensure_ascii=False, sort_keys=False).encode("utf-8")
+        print(temp.decode("utf-8"), "\n")
+    else:
+        print("input is not type dict.", "\n")
 
 
 def get_status():
@@ -12,6 +21,7 @@ def get_status():
     with open(taskpaper, "r", encoding="utf-8") as f:
         data = f.read()
         quiz_status = re.findall(r"\d{3}.*#\d", data)
+        quiz_all = re.findall(r"\[.\].\d{3}.*#\d", data)
 
     status_dict = {}
     for item in quiz_status:
@@ -19,8 +29,12 @@ def get_status():
         already = status_dict.get(temp_list[0], 0)
         if already < int(temp_list[1]):
             status_dict[temp_list[0]] = int(temp_list[1])
+    for item in quiz_all:
+        item_key = item.split("#")[0][4:]
+        if item[:3] == "[ ]" and status_dict[item_key] == 1:
+            status_dict[item_key] = 0
 
-    return sorted(status_dict.items(), key=lambda x: x[1], reverse=True)
+    return {k: v for k, v in sorted(status_dict.items(), key=lambda x: x[1], reverse=True)}
 
 
 def get_tasks_by_day():
@@ -155,7 +169,7 @@ def new_task_write_to_file():
 if __name__ == "__main__":
     taskpaper = r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper"
     print("status(length {}):".format(len(get_status())))
-    pprint(dict(get_status()))
+    pretty_print(get_status())
     # print("\nStatus:")
     # print("  all done." if is_all_done() else "  not all done.")
     # print()
