@@ -9,9 +9,7 @@ def get_status():
     get leetcode quizs' status.
     """
 
-    with open(
-        r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "r", encoding="utf-8"
-    ) as f:
+    with open(taskpaper, "r", encoding="utf-8") as f:
         data = f.read()
         quiz_status = re.findall(r"\d{3}.*#\d", data)
 
@@ -26,9 +24,7 @@ def get_status():
 
 
 def get_tasks_by_day():
-    with open(
-        r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "r", encoding="utf-8"
-    ) as f:
+    with open(taskpaper, "r", encoding="utf-8") as f:
         data = f.readlines()
 
     # today_str = datetime.today().strftime("%Y-%m-%d")
@@ -57,9 +53,7 @@ def get_tasks_first_add():
     dict { '日期' : [任务1, 任务2, ...] ... }
     """
 
-    with open(
-        r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "r", encoding="utf-8"
-    ) as f:
+    with open(taskpaper, "r", encoding="utf-8") as f:
         data = f.readlines()
 
     tasks_dict = {}
@@ -71,7 +65,7 @@ def get_tasks_first_add():
             last_date = date
             tasks_dict[date] = []
         elif item != r"\n" and not re.match(r"^[ \n]*$", item):
-            if 'Week' not in item and item.split("#")[1][0] == '1':
+            if "Week" not in item and item.split("#")[1][0] == "1":
                 task = item.split("#")[0]
                 task_formated = task.lstrip()[4:]
                 tasks_dict[last_date].append(task_formated)
@@ -79,9 +73,7 @@ def get_tasks_first_add():
 
 
 def is_all_done():
-    with open(
-        r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "r", encoding="utf-8"
-    ) as f:
+    with open(taskpaper, "r", encoding="utf-8") as f:
         data = f.readlines()
 
     if data[-1][:5] == "  [ ]":
@@ -150,9 +142,7 @@ def new_review():
 
 def new_task_write_to_file():
     today_str = datetime.datetime.today().strftime("%Y-%m-%d")
-    with open(
-        r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper", "a", encoding="utf-8"
-    ) as f:
+    with open(taskpaper, "a", encoding="utf-8") as f:
         task_add_dict = new_review()
         f.write("\n\n")
         f.write(today_str + ":\n")
@@ -163,6 +153,8 @@ def new_task_write_to_file():
 
 
 if __name__ == "__main__":
+    taskpaper = r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper"
+    print("status(length {}):".format(len(get_status())))
     pprint(dict(get_status()))
     # print("\nStatus:")
     # print("  all done." if is_all_done() else "  not all done.")
