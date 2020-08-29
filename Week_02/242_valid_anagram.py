@@ -8,11 +8,9 @@ class Solution:
         """
         if len(s) != len(t):
             return False
-        dicts = collections.defaultdict(int)
-        for i in range(len(s)):
-            dicts[s[i]] += 1
-            dicts[t[i]] -= 1
-        for val in dicts.values():
-            if val != 0:
-                return False
+        s_counter = collections.Counter(s)
+        t_counter = collections.Counter(t)
+        
+        if s_counter - t_counter != collections.Counter():
+            return False
         return True
