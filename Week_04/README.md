@@ -70,7 +70,8 @@ def BFS(graph, start, end):
 ```python
 left, right = 0, len(array) - 1
 while left <= right:
-    mid = (left + right) / 2
+    # mid = (left + right) / 2
+    mid = (right - left) / 2 + left
     if array[mid] == target:
         # find the target !!
         break or return result
