@@ -8,7 +8,7 @@ class Solution:
         x, y = click[0], click[1]
         if board[x][y] == "M":
             # rule 1
-            board[x][y] == "X"
+            board[x][y] = "X"
         else:
             self.__dfs(board, x, y)
         return board
@@ -18,7 +18,7 @@ class Solution:
         for i in range(8):
             new_x = x + self.directions[i][0]
             new_y = y + self.directions[i][1]
-            if new_x < 0 or new_x >= len(board) or new_y < 0 or new_y >= len(board[1]):
+            if new_x < 0 or new_x >= len(board) or new_y < 0 or new_y >= len(board[0]):
                 continue
             if board[new_x][new_y] == "M":
                 count += 1
@@ -35,7 +35,7 @@ class Solution:
                     new_x < 0
                     or new_x >= len(board)
                     or new_y < 0
-                    or new_y >= len(board[1])
+                    or new_y >= len(board[0])
                     or board[new_x][new_y] != "E"
                 ):
                     continue
