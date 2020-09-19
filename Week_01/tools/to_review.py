@@ -20,8 +20,8 @@ def get_status():
 
     with open(taskpaper, "r", encoding="utf-8") as f:
         data = f.read()
-        quiz_status = re.findall(r"\d{3}.*#\d", data)
-        quiz_all = re.findall(r"\[.\].\d{3}.*#\d", data)
+        quiz_status = re.findall(r"\d{4}.*#\d", data)
+        quiz_all = re.findall(r"\[.\].\d{4}.*#\d", data)
 
     status_dict = {}
     for item in quiz_status:
@@ -167,7 +167,7 @@ def new_task_write_to_file():
 
 
 if __name__ == "__main__":
-    taskpaper = r"D:\mozli\Documents\GitHub\Python_Repo\LeetCode\leetcode.taskpaper"
+    taskpaper = r"D:\\mozli\\Documents\\GitHub\\Python_Repo\\LeetCode\\leetcode.taskpaper"
     print("status(length {}):".format(len(get_status())))
     pretty_print(get_status())
     # print("\nStatus:")
