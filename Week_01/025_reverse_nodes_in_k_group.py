@@ -1,3 +1,7 @@
+class ListNode:
+    pass
+
+
 class Solution:
     def reverseKGroup(self, head, k):
         dummy = jump = ListNode(0)

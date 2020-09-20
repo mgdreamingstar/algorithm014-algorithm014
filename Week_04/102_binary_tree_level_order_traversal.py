@@ -1,6 +1,10 @@
 from typing import List
 
 
+class TreeNode:
+    pass
+
+
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         if not root:
@@ -18,4 +22,4 @@ class Solution:
                 ans.append([node.val for node in level])
                 queue.append(level)
         return ans
-            
+

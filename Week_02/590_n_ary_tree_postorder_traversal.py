@@ -1,4 +1,11 @@
-def postorder(self, root: "Node") -> List[int]:
+from typing import List
+
+
+class Node:
+    pass
+
+
+def postorder(self, root: Node) -> List[int]:
     res, stack = [], root and [root]
     while stack:
         node = stack.pop()

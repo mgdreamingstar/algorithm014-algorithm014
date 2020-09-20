@@ -1,3 +1,7 @@
+class ListNode:
+    pass
+
+
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
         if not (head and head.next):

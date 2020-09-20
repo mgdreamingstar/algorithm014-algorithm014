@@ -1,4 +1,11 @@
-def levelOrder(self, root: 'Node') -> List[List[int]]:
+from typing import List
+
+
+class Node:
+    pass
+
+
+def levelOrder(self, root: Node) -> List[List[int]]:
     def traverse_node(node, level):
         if len(result) == level:
             result.append([])

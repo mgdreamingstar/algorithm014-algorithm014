@@ -1,3 +1,7 @@
+class TreeNode:
+    pass
+
+
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
         if not root:

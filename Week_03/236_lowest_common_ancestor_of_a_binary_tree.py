@@ -1,3 +1,7 @@
+class TreeNode:
+    pass
+
+
 def lowestCommonAncestor(self, root: "TreeNode", p: "TreeNode", q: "TreeNode") -> "TreeNode":
     if not root or root == p or root == q:
         return root

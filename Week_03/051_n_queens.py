@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         board = [["."] * n for _ in range(n)]  # 初始化二维棋盘

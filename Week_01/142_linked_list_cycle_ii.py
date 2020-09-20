@@ -1,3 +1,7 @@
+class ListNode:
+    pass
+
+
 class Solution:
     def detectCycle(self, head: ListNode) -> ListNode:
         if head is None or head.next is None:

@@ -1,9 +1,13 @@
+from typing import List
+
+
 class Solution1:
     """
     O(n^2)
     34/35
     timeout
     """
+
     def rotate(self, nums: List[int], k: int) -> None:
         """
         Do not return anything, modify nums in-place instead.
@@ -15,30 +19,33 @@ class Solution1:
             nums[0] = r
             k -= 1
 
+
 class Solution2:
     """
     O(n)
     pass
     """
+
     def rotate(self, nums: List[int], k: int) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
         if k > len(nums):
-            k = k % len(nums) 
+            k = k % len(nums)
         if k <= 0:
             return nums
         n = len(nums)
-        temp = nums[-k:] 
+        temp = nums[-k:]
         nums[k:] = nums[: n - k]
         nums[:k] = temp
-        
-        
+
+
 class Solution3:
     """
     O(n)
     pass
     """
+
     def rotate(self, nums: List[int], k: int) -> None:
         """
         Do not return anything, modify nums in-place instead.
@@ -47,7 +54,7 @@ class Solution3:
         self.reverse(nums, 0, len(nums) - 1)
         self.reverse(nums, 0, k - 1)
         self.reverse(nums, k, len(nums) - 1)
-        
+
     def reverse(self, nums, start, end):
         while start < end:
             nums[start], nums[end] = nums[end], nums[start]

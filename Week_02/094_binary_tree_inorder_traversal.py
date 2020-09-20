@@ -1,6 +1,10 @@
 from typing import List
 
 
+class TreeNode:
+    pass
+
+
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         if not root:

@@ -1,3 +1,7 @@
+class ListNode:
+    pass
+
+
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
         if not (head and head.next):

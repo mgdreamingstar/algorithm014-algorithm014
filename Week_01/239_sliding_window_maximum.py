@@ -1,3 +1,7 @@
+from collections import deque
+from typing import List
+
+
 def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
     if not nums:
         return []
