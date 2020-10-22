@@ -10,13 +10,13 @@ class Solution:
         self.__dfs(1, k, n, [], res)
         return res
 
-    def __dfs(self, start, k, n, pre, res):
-        if len(pre) == k:
-            res.append(pre[:])
+    def __dfs(self, start, k, n, path, res):
+        if len(path) == k:
+            res.append(path[:])
             return
 
         # 注意：这里 i 的上限是归纳得到的
-        for i in range(start, n - (k - len(pre)) + 2):
-            pre.append(i)
-            self.__dfs(i + 1, k, n, pre, res)
-            pre.pop()
+        for i in range(start, n - (k - len(path)) + 2):
+            path.append(i)
+            self.__dfs(i + 1, k, n, path, res)
+            path.pop()
