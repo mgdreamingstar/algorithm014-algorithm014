@@ -1,42 +1,26 @@
-class Trie:
+class Trie(object):
     def __init__(self):
-        """
-        Initialize your data structure here.
-        """
-        self.lookup = {}
-
-    def insert(self, word: str) -> None:
-        """
-        Inserts a word into the trie.
-        """
-        tree = self.lookup
-        for a in word:
-            if a not in tree:
-                tree[a] = {}
-            tree = tree[a]
-        # 单词结束标志
-        tree["#"] = "#"
-
-    def search(self, word: str) -> bool:
-        """
-        Returns if the word is in the trie.
-        """
-        tree = self.lookup
-        for a in word:
-            if a not in tree:
+        self.root = {}
+        self.end_of_word = "#"
+    
+    def insert(self, word):
+        node = self.root
+        for char in word:
+            node = node.setdefault(char, {})
+        node[self.end_of_word] = self.end_of_word
+    
+    def search(self, word):
+        node = self.root
+        for char in word:
+            if char not in node:
                 return False
-            tree = tree[a]
-        if "#" in tree:
-            return True
-        return False
-
-    def startsWith(self, prefix: str) -> bool:
-        """
-        Returns if there is any word in the trie that starts with the given prefix.
-        """
-        tree = self.lookup
-        for a in prefix:
-            if a not in tree:
+            node = node[char]
+        return self.end_of_word in node
+    
+    def startsWith(self, prefix):
+        node = self.root
+        for char in prefix:
+            if char not in node:
                 return False
-            tree = tree[a]
+            node = node[char]
         return True
