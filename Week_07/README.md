@@ -71,3 +71,27 @@ def parent(self, p, i):   # 函数名有时为：find
 		x = i; i = p[i]; p[x] = root 
 	return root
 ```
+
+## 双向 BFS
+
+### 代码模板
+
+```python
+def BFS_2d(graph, start, end, nodelist):
+    front, back, nodelist = {start}, {end}, {nodelist}
+    step = 1
+    while front and back:
+        step += 1
+        next_front = set()
+        for node in front:
+            new_node = func(node)
+            if new_node in back:
+                return step
+            if new_node in nodelist:
+                next_front.add(new_node)
+                nodelist.remove(new_node)
+        front = next_front
+        if len(back) < len(front):
+            front, back = back, front
+    return 0
+```
