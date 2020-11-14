@@ -1,0 +1,53 @@
+def bubble_sort(nums):
+    for i in range(len(nums) - 1):
+        # i 用来记录已排序好的元素数量
+        for j in range(len(nums) - i - 1):
+            if nums[j] > nums[j + 1]:
+                nums[j], nums[j + 1] = nums[j + 1], nums[j]
+    return nums
+
+
+def selection_sort(nums):
+    N = len(nums)
+    for i in range(N):
+        minimum = i
+        for j in range(i + 1, N):
+            if nums[minimum] > nums[j]:
+                minimum = j
+        nums[i], nums[minimum] = nums[minimum], nums[i]
+    return nums
+
+
+def insertion_sort(nums):
+    for i in range(1, len(nums)):
+        current = nums[i]
+        pre_ind = i - 1
+        while pre_ind >= 0 and nums[pre_ind] > current:
+            nums[pre_ind + 1] = nums[pre_ind]
+            pre_ind -= 1
+        nums[pre_ind + 1] = current
+    return nums
+
+
+def shell_sort(nums):
+    gap = len(nums) // 2
+    while gap >= 1:
+        for i in range(gap, len(nums)):
+            j = i  # 切换分组
+            current = nums[i]
+            while j >= gap and current < nums[j - gap]:
+                # 分组内比较
+                nums[j] = nums[j - gap]
+                j -= gap
+            nums[j] = current
+        gap //= 2
+    return nums
+
+
+if __name__ == "__main__":
+    nums = [1, 3, 4, 5, 2]
+    print("bubble sort:", bubble_sort(nums))
+    print("selection sort:", selection_sort(nums))
+    print("insertion sort:", insertion_sort(nums))
+    print("shell sort:", shell_sort(nums))
+
