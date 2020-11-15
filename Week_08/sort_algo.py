@@ -19,6 +19,7 @@ def selection_sort(nums):
 
 
 def insertion_sort(nums):
+    # 简单插入排序
     for i in range(1, len(nums)):
         current = nums[i]
         pre_ind = i - 1
@@ -30,6 +31,7 @@ def insertion_sort(nums):
 
 
 def shell_sort(nums):
+    # 希尔排序（复杂插入排序）
     gap = len(nums) // 2
     while gap >= 1:
         for i in range(gap, len(nums)):
@@ -63,10 +65,43 @@ def quick_sort(nums, begin, end):
     quick_sort(nums, begin, pivot - 1)
     quick_sort(nums, pivot + 1, end)
     return nums
+
+
+def merge_sort(nums, left, right):
+    def merge(nums, left, mid, right):
+        temp = []
+        i = left
+        j = mid + 1
+        while i <= mid and j <= right:
+            if nums[i] <= nums[j]:
+                temp.append(nums[i])
+                i += 1
+            else:
+                temp.append(nums[j])
+                j += 1
+        while i <= mid:
+            temp.append(nums[i])
+            i += 1
+        while j <= right:
+            temp.append(nums[j])
+            j += 1
+        nums[left : right + 1] = temp
+
+    if right <= left:
+        return
+    mid = (left + right) >> 1
+    merge_sort(nums, left, mid)
+    merge_sort(nums, mid + 1, right)
+    merge(nums, left, mid, right)
+    return nums
+
+
 if __name__ == "__main__":
     nums = [1, 3, 4, 5, 2]
-    print("bubble sort:", bubble_sort(nums))
-    print("selection sort:", selection_sort(nums))
-    print("insertion sort:", insertion_sort(nums))
-    print("shell sort:", shell_sort(nums))
+    # print("bubble sort:", bubble_sort(nums))
+    # print("selection sort:", selection_sort(nums))
+    # print("insertion sort:", insertion_sort(nums))
+    # print("shell sort:", shell_sort(nums))
+    # print("quick sort:", quick_sort(nums, 0, len(nums) - 1))
+    print("merge sort:", merge_sort(nums, 0, len(nums) - 1))
 
