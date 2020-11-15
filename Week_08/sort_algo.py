@@ -44,6 +44,25 @@ def shell_sort(nums):
     return nums
 
 
+def quick_sort(nums, begin, end):
+    def partition(arr, begin, end):
+        # left_nums 是小于 pivot 数字的个数
+        pivot, left_nums = end, begin
+        for i in range(begin, end):
+            # 只要找到比 pivot 小的元素，left_nums 就 +1
+            if arr[i] < arr[pivot]:
+                arr[left_nums], arr[i] = arr[i], arr[left_nums]
+                left_nums += 1
+        # 最终，left_nums 就是 pivot 要被移动到的位置
+        arr[pivot], arr[left_nums] = arr[left_nums], arr[pivot]
+        return left_nums
+
+    if begin >= end:
+        return
+    pivot = partition(nums, begin, end)
+    quick_sort(nums, begin, pivot - 1)
+    quick_sort(nums, pivot + 1, end)
+    return nums
 if __name__ == "__main__":
     nums = [1, 3, 4, 5, 2]
     print("bubble sort:", bubble_sort(nums))
