@@ -70,7 +70,10 @@ def quick_sort(nums, begin, end):
 def merge_sort(nums, left, right):
     def merge(nums, left, mid, right):
         temp = []
+<<<<<<< HEAD
         # 两部分的开始分别为 i, j
+=======
+>>>>>>> c8ad902eb75600cf1fa52cad849950930a3af244
         i = left
         j = mid + 1
         while i <= mid and j <= right:
@@ -91,10 +94,15 @@ def merge_sort(nums, left, right):
     if right <= left:
         return
     mid = (left + right) >> 1
+<<<<<<< HEAD
     # 不断深入到下一层
     merge_sort(nums, left, mid)
     merge_sort(nums, mid + 1, right)
     # 返回上一层后合并
+=======
+    merge_sort(nums, left, mid)
+    merge_sort(nums, mid + 1, right)
+>>>>>>> c8ad902eb75600cf1fa52cad849950930a3af244
     merge(nums, left, mid, right)
     return nums
 
